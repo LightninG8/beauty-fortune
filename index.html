@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div class="wheel">
+    <div class="wheel__container">
+      <div class="wheel__title">
+        <img class="wheel__img title-img" src="./img/title.png" alt="">
+        <img class="wheel__img title-img-mob" src="./img/title-mob.png" alt="">
+      </div>
+      <div class="wheel__spinner-container">
+        <img class="wheel__img ticker-img" src="./img/ticker.png" alt="">
+        <img class="lights-img" src="./img/lights.png" alt="">
+        <span class="wheel__spinner anim">
+          <img class="wheel__img wheel-img" src="./img/wheel.png" alt="">
+        </span>
+
+      </div>
+
+      <div class="wheel__buttons">
+        <div class="wheel__button wheel__button_no-spin hide">
+          <img class="wheel__img no-spin-img" src="./img/no-spin.png" alt="Нет вращений">
+        </div>
+        <div class="wheel__button wheel__button_spin">
+          <img class="wheel__img spin-img" src="./img/spin.png" alt="Крутить">
+        </div>
+        <div class="wheel__button wheel__button_prize hide">
+          <img class="wheel__img prize-img" src="./img/get-prize.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="wheel__available-spins">
+      Доступно вращений:
+      <span class="available-spins">2</span>
+      <span class="deal-spins hide">4</span>
+    </div>
+    <audio
+      src="https://fs01.getcourse.ru/fileservice/file/download/a/176948/sc/65/h/8913d21d6ae251b423d89ada59677669.mp3"
+      class="hide" preload="auto"></audio>
+
+
+    <div class="wheel__popup popup hide">
+      <div class="popup__bg"></div>
+      <div class="popup__image-container">
+        <img src="./img/prize-bg.jpg" class="popup__image-bg">
+        <img src="./img/prize-bg-mob.jpg" class="popup__image-bg-mob">
+        <div class="popup__text">Приз</div>
+      </div>
+      <div class="popup__close">
+        <img src="./img/popup-close.png" alt="X" class="popup__image">
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="./main.js"></script>
+</body>
+
+</html>
