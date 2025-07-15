@@ -1,4 +1,4 @@
-(() => {
+(async () => {
   // ---------- DOM элементы ----------
   const wheelSpinnerElem = document.querySelector(".wheel__spinner");
   const wheelSpinButtonElem = document.querySelector(".wheel__button_spin");
@@ -20,15 +20,27 @@
   }
 
   // ---------- Получение переменных пользователя ----------
-  // let availableSpins = +availableSpinsElem.textContent || 0;
-  // let dealSpins = +dealSpinsElem.textContent || 0;
+  const platform_id =
+    window.Telegram?.WebApp?.initDataUnsafe?.user?.id || 777795628;
+
+  const user = await fetch(
+    "https://chatter.salebot.pro/api/d40f3d1714be1b726c8d90824525e691/find_client_id_by_platform_id",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        platform_ids: [platform_id],
+      }),
+    }
+  ).then((res) => res.json());
+
   const urlParams = new URLSearchParams(window.location.search);
-  let availableSpins = +urlParams.get("a") || 0;
-  let dealSpins = +urlParams.get("d") || 0;
-  let clientId = +urlParams.get("c") || 0;
+  let availableSpins = +user[0]["variables"]["доступно_вращений"] || 0;
+  let dealSpins = +user[0]["variables"]["сделано_вращений"] || 0;
+  let clientId = +user[0]["id"];
+  const partnerId = +user[0]["variables"]["partner_id"] || 0;
   const superPrizeAvailable = +urlParams.get("sp") || 0;
-   // список призов
-   const prizes = [
+  // список призов
+  const prizes = [
     {
       text: "Курс Money-mo mini",
       dropChance: 0.03,
@@ -43,7 +55,7 @@
     },
     {
       text: "Созвон с Леной по стратегии продвижения/запуска",
-      dropChance: 0.5,
+      dropChance: partnerId ? 0.5 : 0,
     },
     {
       text: "Курс по воронкам и рилс",
@@ -51,7 +63,7 @@
     },
     {
       text: "Бесплатное место на флагман должно Выпасть одному человеку",
-      dropChance: superPrizeAvailable > 0 ? 0.01 : 0,
+      dropChance: superPrizeAvailable > 0 ? 1 : 0,
     },
     {
       text: "Кружка",
@@ -63,7 +75,6 @@
     },
   ];
 
-  
   // ---------- Базовая настройка DOM элементов ----------
   // Выключаем ненужные кнопки
   wheelPrizeButtonElem.classList.add("hide");
@@ -171,10 +182,7 @@
     for (let i = 0; i < items.length; i++) {
       item = items[i];
 
-      if (
-        current <= chance &&
-        chance < current + item.dropChance
-      ) {
+      if (current <= chance && chance < current + item.dropChance) {
         return i;
       }
 
@@ -283,16 +291,16 @@
     isSpinning = false;
 
     // отправляем подарок в бота
-    fetch("https://chatter.salebot.pro/api/9c0729878299ab9db77dcd82e4d19fdd/callback",
+    fetch(
+      "https://chatter.salebot.pro/api/d40f3d1714be1b726c8d90824525e691/callback",
       {
         method: "POST",
         body: JSON.stringify({
           message: `${prizeIndex}`,
-          client_id: clientId
-        })
+          client_id: clientId,
+        }),
       }
-    )
- 
+    );
 
     // Показываем попап
     setTimeout(() => {
