@@ -59,7 +59,7 @@
     },
     {
       text: "Бесплатное место на флагман",
-      dropChance: superPrizeAvailable > 0 ? 1 : 0,
+      dropChance: superPrizeAvailable > 0 ? 0.01 : 0,
     },
     {
       text: "Кружка",
