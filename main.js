@@ -20,25 +20,21 @@
   }
 
   // ---------- Получение переменных пользователя ----------
-  const platform_id =
-    window.Telegram?.WebApp?.initDataUnsafe?.user?.id || 777795628;
-
-  const user = await fetch(
-    "https://chatter.salebot.pro/api/d40f3d1714be1b726c8d90824525e691/find_client_id_by_platform_id",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        platform_ids: [platform_id],
-      }),
-    }
-  ).then((res) => res.json());
 
   const urlParams = new URLSearchParams(window.location.search);
-  let availableSpins = +user[0]["variables"]["доступно_вращений"] || 0;
-  let dealSpins = +user[0]["variables"]["сделано_вращений"] || 0;
-  let clientId = +user[0]["id"];
-  const partnerId = +user[0]["variables"]["partner_id"] || 0;
   const superPrizeAvailable = +urlParams.get("sp") || 0;
+  const clientId = +urlParams.get("c") || 0;
+  const user = await fetch(
+    "https://chatter.salebot.pro/api/d40f3d1714be1b726c8d90824525e691/get_variables?client_id=" +
+      clientId
+  ).then((res) => res.json());
+
+
+  let availableSpins = +user["доступно_вращений"] || 0;
+  let dealSpins = +user["сделано_вращений"] || 0;
+
+  const partnerId = +user["partner_id"] || 0;
+
   // список призов
   const prizes = [
     {
@@ -54,7 +50,7 @@
       dropChance: 0.85,
     },
     {
-      text: "Созвон с Леной по стратегии продвижения/запуска",
+      text: "Созвон с Леной по стратегии запуска",
       dropChance: partnerId ? 0.5 : 0,
     },
     {
@@ -62,7 +58,7 @@
       dropChance: 0.2,
     },
     {
-      text: "Бесплатное место на флагман должно Выпасть одному человеку",
+      text: "Бесплатное место на флагман",
       dropChance: superPrizeAvailable > 0 ? 1 : 0,
     },
     {
