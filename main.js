@@ -42,7 +42,7 @@
       dropChance: 0.03,
     },
     {
-      text: "Промокод на 15.000",
+      text: "15.000 на обучение",
       dropChance: 0.05,
     },
     {
@@ -51,7 +51,7 @@
     },
     {
       text: "Созвон с Леной по стратегии запуска",
-      dropChance: partnerId ? 0.5 : 0,
+      dropChance: partnerId ? 0 : 0.5,
     },
     {
       text: "Курс по воронкам и рилс",
