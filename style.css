@@ -309,6 +309,9 @@ body {
 }
 
 .popup__image-container {
+  background: #000;
+  padding-bottom: 20px;
+
   position: relative;
   max-width: 600px;
   z-index: 2;
@@ -344,10 +347,24 @@ body {
   max-width: 400px;
   position: absolute;
   left: 50%;
-  top: 72.5%;
+  top: calc(72.5% - 15px);
 
   font-size: 22px;
   text-align: center;
+
+  transform: translate(-50%, -50%);
+}
+
+.popup__subtext {
+  width: 100%;
+  max-width: 400px;
+  position: absolute;
+  left: 50%;
+  top: 88%;
+
+  font-size: 12px;
+  text-align: center;
+  opacity: 0.6;
 
   transform: translate(-50%, -50%);
 }
@@ -844,6 +861,10 @@ body.is-spinning .wheel__spinner-container {
 
   .popup__text {
     width: 290px;
-    top: 84.5%;
+    top: calc(84.5% - 15px);
+  }
+
+  .popup__subtext {
+    top: 94%;
   }
 }
