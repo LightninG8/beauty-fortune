@@ -137,6 +137,8 @@ body {
   -ms-transform: rotate(calc(var(--rotate, 0) * 1deg));
   transform: rotate(calc(var(--rotate, 0) * 1deg));
   z-index: 1;
+  will-change: transform;
+  aspect-ratio: 1 / 1;
 }
 
 .is-spinning .wheel__spinner {
@@ -177,6 +179,7 @@ body {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  will-change: transform;
 }
 
 .title-img {
@@ -210,6 +213,7 @@ body {
 
 .wheel-img {
   max-height: 100%;
+  width: 100%;
   /* поворачиваем элемент  */
   z-index: 1;
 }
@@ -808,6 +812,11 @@ body.is-spinning .wheel__spinner-container {
 
   .wheel__spinner-container {
     margin-top: 0;
+    max-width: 320px;
+    max-height: 320px;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1;
   }
 
   .wheel__button {
