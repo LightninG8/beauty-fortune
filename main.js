@@ -42,19 +42,19 @@
   const prizes = [
     {
       text: "Курс Money-mo mini",
-      dropChance: 0.03,
+      dropChance: 0.24,
     },
     {
       text: "15.000 на обучение",
-      dropChance: 0.05,
+      dropChance: 0.2,
     },
     {
       text: "Место на бесплатную диагностику блога",
-      dropChance: 0.85,
+      dropChance: 0.3,
     },
     {
       text: "Созвон с Леной по стратегии запуска",
-      dropChance: partnerId ? 0 : 0.5,
+      dropChance: partnerId ? 0 : 0.2,
     },
     {
       text: "Курс по воронкам и рилс",
@@ -74,9 +74,13 @@
     },
   ];
 
+  let lastPrizeChance = prizes[lastPrize].dropChance;
   if (lastPrize > -1) {
     prizes[lastPrize].dropChance = 0;
   }
+
+  console.log(lastPrize);
+  console.log(prizes)
 
   // ---------- Базовая настройка DOM элементов ----------
   // Выключаем ненужные кнопки
@@ -305,6 +309,10 @@
       }
     );
 
+    prizes[lastPrize].dropChance = lastPrizeChance
+    prizes[prizeIndex].dropChance = 0;
+    lastPrize = prizeIndex;
+
     // Показываем попап
     setTimeout(() => {
       showPrizePopup(prizeIndex);
@@ -352,26 +360,3 @@
   });
   // });
 })();
-
-const obj = {};
-
-for (let i = 1; i <= 158; i++) {
-  const questions = [
-    -59, -64, -69, -74, 79, -84, -89, 94, -99, -104
-  ];
-  const questions_abs = questions.map((el) => Math.abs(el));
-
-  if (questions_abs.includes(i)) {
-    const q_i = questions_abs.indexOf(i);
-
-    if (questions[q_i] < 0) {
-      obj[i] = "7";
-    } else {
-      obj[i] = "1";
-    }
-  } else {
-    obj[i] = "1";
-  }
-}
-
-console.log(JSON.stringify(obj));
