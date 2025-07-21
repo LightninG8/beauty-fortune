@@ -33,6 +33,8 @@
 
   let availableSpins = +user["доступно_вращений"] || 0;
   let dealSpins = +user["сделано_вращений"] || 0;
+  let lastPrize = +user["последний_подарок"] || -1;
+
 
   const partnerId = +user["partner_id"] || 0;
 
@@ -71,6 +73,10 @@
       dropChance: 0.02,
     },
   ];
+
+  if (lastPrize > -1) {
+    prizes[lastPrize].dropChance = 0;
+  }
 
   // ---------- Базовая настройка DOM элементов ----------
   // Выключаем ненужные кнопки
@@ -346,3 +352,26 @@
   });
   // });
 })();
+
+const obj = {};
+
+for (let i = 1; i <= 158; i++) {
+  const questions = [
+    -59, -64, -69, -74, 79, -84, -89, 94, -99, -104
+  ];
+  const questions_abs = questions.map((el) => Math.abs(el));
+
+  if (questions_abs.includes(i)) {
+    const q_i = questions_abs.indexOf(i);
+
+    if (questions[q_i] < 0) {
+      obj[i] = "7";
+    } else {
+      obj[i] = "1";
+    }
+  } else {
+    obj[i] = "1";
+  }
+}
+
+console.log(JSON.stringify(obj));
