@@ -35,7 +35,6 @@
   let dealSpins = +user["сделано_вращений"] || 0;
   let lastPrize = +user["последний_подарок"] || -1;
 
-
   const partnerId = +user["partner_id"] || 0;
 
   // список призов
@@ -74,13 +73,10 @@
     },
   ];
 
-  let lastPrizeChance = prizes[lastPrize].dropChance;
+  let lastPrizeChance = prizes[lastPrize]?.dropChance || -1;
   if (lastPrize > -1) {
     prizes[lastPrize].dropChance = 0;
   }
-
-  console.log(lastPrize);
-  console.log(prizes)
 
   // ---------- Базовая настройка DOM элементов ----------
   // Выключаем ненужные кнопки
@@ -309,7 +305,9 @@
       }
     );
 
-    prizes[lastPrize].dropChance = lastPrizeChance
+    if (lastPrize > -1) {
+      prizes[lastPrize].dropChance = lastPrizeChance;
+    }
     prizes[prizeIndex].dropChance = 0;
     lastPrize = prizeIndex;
 
