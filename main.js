@@ -49,7 +49,7 @@
             id: 7917511,
         },
         {
-            text: 'Персональная стратегия, которая поможет создать и начать продавать продукт в 2026 году',
+            text: 'Персональная стратегия',
             dropChance: 50.9,
             id: 7917514,
         },
@@ -59,7 +59,7 @@
             id: 7917515,
         },
         {
-            text: 'Персональный зум на котором выстроим автоворонку в твоем блоге',
+            text: 'Персональный зум',
             dropChance: 0.2,
             id: 7917516,
         },
@@ -212,20 +212,29 @@
     }
 
     async function createOrder(id) {
-        await fetch(`https://lenaplatoshina.getcourse.ru/pl/api/deals`, {
+        // формируем объект params
+        const params = {
+            user: {
+                email: email,
+            },
+            deal: {
+                offer_code: id.toString(),
+                deal_cost: 0,
+            },
+        };
+
+        // кодируем params в base64
+        const paramsBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(params))));
+
+        // создаём FormData
+        const formData = new FormData();
+        formData.append('key', someHash);
+        formData.append('action', 'add');
+        formData.append('params', paramsBase64);
+
+        return await fetch('https://lenaplatoshina.getcourse.ru/pl/api/deals', {
             method: 'POST',
-            body: JSON.stringify({
-                key: someHash,
-                action: 'add',
-                params: {
-                    user: {
-                        email: email,
-                    },
-                    deal: {
-                        offer_code: id.toString(),
-                    },
-                },
-            }),
+            body: formData,
         });
     }
 
