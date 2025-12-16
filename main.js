@@ -40,36 +40,36 @@
   // список призов
   const prizes = [
     {
-      text: "Курс Money-mo mini",
-      dropChance: 0.24,
+      text: "ЦЕХ ПО ЗАПУСКАМ И ПРОДАЖАМ",
+      dropChance: 1.8,
     },
     {
       text: "15.000 на обучение",
-      dropChance: 0.2,
+      dropChance: 3,
     },
     {
-      text: "Место на бесплатную диагностику блога",
-      dropChance: 0.3,
+      text: "Персональная стратегия, которая поможет создать и начать продавать продукт в 2026 году",
+      dropChance: 50.9,
     },
     {
       text: "Созвон с Леной по стратегии запуска",
-      dropChance: partnerId ? 0 : 0.2,
+      dropChance: partnerId ? 0 : 11.98,
     },
     {
-      text: "Курс по воронкам и рилс",
+      text: "Персональный зум на котором выстроим автоворонку в твоем блоге",
       dropChance: 0.2,
     },
     {
-      text: "Бесплатное место на флагман",
+      text: "Бесплатное место Бьюти форт 3.0",
       dropChance: superPrizeAvailable > 0 ? 0.01 : 0,
     },
     {
-      text: "Кружка",
-      dropChance: 0.01,
+      text: "Доступ к предобучению бьюти форт 3.0",
+      dropChance: 0.6,
     },
     {
       text: "Скидка 50% на флагман",
-      dropChance: 0.02,
+      dropChance: 1.2,
     },
   ];
 
