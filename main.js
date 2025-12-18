@@ -27,14 +27,14 @@
     const clientId = +urlParams.get('c') ?? 0;
     const email = urlParams.get('e') ?? '';
 
-    console.log(email);
-
     const user = await fetch('https://chatter.salebot.pro/api/d40f3d1714be1b726c8d90824525e691/get_variables?client_id=' + clientId).then((res) => res.json());
+    const tgUsername = user['tg_username'] ?? '';
+
     let availableSpins = +user['доступно_вращений'] ?? 0;
     let dealSpins = +user['сделано_вращений'] ?? 0;
     let lastPrize = +user['последний_подарок'] ?? -1;
 
-    const partnerId = +user['partner_id'] || 0;
+    const partnerId = +user['partner_id'] ?? 0;
 
     // список призов
     const prizes = [
@@ -216,10 +216,17 @@
         const params = {
             user: {
                 email: email,
+                addfields: {
+                    'Ник в Telegram': tgUsername,
+                },
+            },
+            system: {
+                refresh_if_exists: 1, // обновлять ли существующего пользователя 1/0 да/нет
             },
             deal: {
                 offer_code: id.toString(),
                 deal_cost: 0,
+                funnel_id: '32080',
             },
         };
 
