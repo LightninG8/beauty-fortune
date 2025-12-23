@@ -23,9 +23,9 @@
 
     // ---------- Получение переменных пользователя ----------
     const urlParams = new URLSearchParams(window.location.search);
-    const superPrizeAvailable = +urlParams.get('sp') ?? 0;
-    const clientId = +urlParams.get('c') ?? 0;
-    const email = urlParams.get('e') ?? '';
+    const superPrizeAvailable = +urlParams.get('sp') || 0;
+    const clientId = +urlParams.get('c') || 0;
+    const email = urlParams.get('e') || '';
 
     const user = await fetch('https://chatter.salebot.pro/api/d40f3d1714be1b726c8d90824525e691/get_variables?client_id=' + clientId).then((res) => res.json());
     const tgUsername = user['tg_username'] ?? '';
